@@ -1,0 +1,88 @@
+/*
+Luke A. Romo
+BSheep Challenge
+Computer Science 2 - Thyago Mota, PhD
+MSU Denver
+01/28/2020
+
+This program receives user input to build the smallest possible fence around the existing sheep.
+It requires a minimum of two sheep and prints out the coordinates of the 4 corners of the fence based on sheep
+location input from a file.
+
+Feedback on quicker, more efficient methods welcome! :)
+*/
+
+package com.luke;
+
+import java.util.Scanner;
+import java.io.*;
+
+public class BSheep2 {
+
+    public static void main(String[] args) throws IOException {
+
+
+        
+        String INPUT_FILE = "C:\\Users\\Luke\\IdeaProjects\\BSheep2.0\\src\\com\\luke\\test5.txt";
+
+       
+        File inputDataFile = new File(INPUT_FILE);
+
+        
+        Scanner inputFile = new Scanner(inputDataFile);
+        int xMin = 0, yMin = 0, xMax = 0, yMax = 0, x, y;
+
+        //If the file has data, the first integer is the nSheep
+        if (inputFile.hasNext()){
+
+            int nSheep = inputFile.nextInt();
+
+
+                //Require at least 2 sheep
+                if (nSheep < 2) {
+                    System.out.println("A minimum of 2 sheep are required. Check and reload file.");
+                    System.exit(0);
+                }
+                else {
+                    if (inputFile.hasNextLine()) {
+                        x = xMin = xMax = inputFile.nextInt();
+                        y = yMin = yMax = inputFile.nextInt();
+                    }
+                }
+
+            //Continue to the next line and get the next x & y values to compare to the Min/Max
+            while (inputFile.hasNextLine()) {
+                x = inputFile.nextInt();
+                y = inputFile.nextInt();
+
+                //Get xMin & yMin
+                if (x < xMin) {
+                    xMin = x;
+                }
+
+                if (y < yMin) {
+                    yMin = y;
+                }
+
+                //Get xMax & yMax
+                if (x > xMax) {
+                    xMax = x;
+                }
+                if (y > yMax) {
+                    yMax = y;
+                }
+
+            }
+        }
+        // Print results
+        
+        //Original output did not follow activity instructions 
+        /*System.out.println("xMin = " + xMin + " yMin = " + yMin +
+                "\nxMax = " + xMax + " yMax = " + yMax);*/
+        System.out.print("Fence Coordinates: { (" + xMin + "," + yMin + "),"+
+                                             " (" + xMax + "," + yMin + "),"+
+                                             " (" + xMax + "," + yMax + "),"+
+                                             " (" + xMin + "," + yMax + ")");
+
+    }
+}
